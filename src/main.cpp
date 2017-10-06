@@ -1,6 +1,6 @@
 // main.c
 
-// libraries
+// standard libraries:
 // #include <new>
 #include <iostream>
 // #include <stdio.h> // printf
@@ -8,9 +8,14 @@
 
 // myheaders:
 #include "debug.h"
-#include "ReadPDBfile.hpp"
 #include "dcd.h"
+#include "ReadPDBfile.hpp"
 #include "contacts.hpp"
+#include "parameters.hpp"
+
+
+// Global Parameters:
+Parameters params;
 
 
 int main(int argc, char *argv[]) {
@@ -44,6 +49,17 @@ int main(int argc, char *argv[]) {
     // Read topology.
     SetContacts lst_contacts;
     lst_contacts = read_contacts_from_file(argv[2]);
+
+
+    // Modify Parameters:
+    std::cout << "Default params: " << std::endl;
+    std::cout << params.size << " "
+              << params.x << " "
+              << params.y << " "
+              << params.z << " "
+              << std::endl;
+
+
 
 
     return 0;
