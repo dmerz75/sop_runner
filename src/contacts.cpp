@@ -1478,13 +1478,14 @@ void write_contacts_to_file(FILE *fp_topology,SetContacts contact_set)
     }
 }
 
-SetContacts read_contacts_from_file(char filename[40])
+// SetContacts read_contacts_from_file(char filename[40])
+SetContacts read_contacts_from_file(std::string fn)
 {
     SetContacts contacts;
     std::string line;
     std::string line_after1;
     std::string line_after2;
-    std::string fn(filename);
+    // std::string fn(filename);
 
     std::string str_index1;
     std::string str_index2;
@@ -1500,10 +1501,11 @@ SetContacts read_contacts_from_file(char filename[40])
     dist = eh = 0.0;
 
     std::cout << "Reading contacts from topology file: "
-              << filename
+              << fn
               << std::endl;
 
-    std::ifstream cfile(fn.c_str());
+    // std::ifstream cfile(fn.c_str());
+    std::ifstream cfile(fn);
 
     std::size_t found1;
     std::size_t found2;

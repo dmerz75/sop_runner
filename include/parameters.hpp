@@ -24,6 +24,7 @@
    headers:
    --------------------------------------------------------- */
 #include "debug.h"
+// #include "bonds.hpp"
 /* #include "system.hpp" */
 // #include "atom.hpp"
 
@@ -53,6 +54,10 @@ public:
     int size;
     double x,y,z;
     int steps,dcdfreq,dcdstart; // total steps, dcdfreq, dcdstart;
+    std::string pdb = "mol1.pdb";
+    std::string topology = "emol.top";
+    std::string dcdfile = "mol1.dcd";
+    std::string bond_topology = "bond_topology.top";
 
 };
 
@@ -79,9 +84,15 @@ inline Parameters::~Parameters()
 inline void Parameters::print_parameters()
 {
     std::cout << "---*--- Configuration ---*---" << std::endl;
+    std::cout << "pdb: " << pdb << std::endl;
+    std::cout << "dcd: " << dcdfile << std::endl;
+    std::cout << "topology: " << topology << std::endl;
+    std::cout << "bond_topology: " << bond_topology << std::endl;
+
     std::cout << "steps: " << steps << std::endl;
     std::cout << "dcdfreq: " << dcdfreq << std::endl;
     std::cout << "dcdstart: " << dcdstart << std::endl;
+
 }
 
 
@@ -91,7 +102,7 @@ inline void Parameters::print_parameters()
 // void ReadPDBfile(PDBfile *pdbfile,char filename[40]);
 // void read_config_modify_parameters();
 // void read_sop_config(char filename[40]);
-void read_sop_config();
+void read_sop_config(std::string sopconfig);
 // void print_config();
 
 // Global Parameters:

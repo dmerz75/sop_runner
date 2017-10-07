@@ -1,8 +1,8 @@
-# // 1: c++, c: ReadPDBfile
+# // 1: c++, c: bonds
 # // 2: name:
-# // .ReadPDBfile
-#ifndef _ReadPDBfile_hpp_
-#define _ReadPDBfile_hpp_
+# // .bonds
+#ifndef BONDS_H
+#define BONDS_H
 
 /* ---------------------------------------------------------
    libraries:
@@ -10,42 +10,49 @@
 // #include <stdio.h>
 // #include <stdlib.h> // strtod?, stod
 // #include <assert.h>
-// #include <string.h> // string
+#include <string.h> // string
 // #include <cctype.h>
 /* #include <algorithm> // remove_if, count */
 /* #include <iostream> */
 /* #include <fstream> */
 /* #include <ctime> */
 // #include <list>        // std::list
-/* #include <vector> */
+#include <vector>
 // #include <iterator> // istream_iterator
+#include "boost/tuple/tuple.hpp"
+
 
 
 /* ---------------------------------------------------------
    headers:
    --------------------------------------------------------- */
 #include "debug.h"
-#include "system.hpp"
+/* #include "system.hpp" */
 // #include "atom.hpp"
+
 
 
 /* ---------------------------------------------------------
    Definitions:
    --------------------------------------------------------- */
+/* #define BUFFERSIZE 900 */
+
+typedef boost::tuple<int,int,double> Bond;
+typedef std::vector<Bond> SetBonds;
+
 
 
 /* ---------------------------------------------------------
    Classes:
    --------------------------------------------------------- */
+// header_class
+
 
 
 /* ---------------------------------------------------------
    function declarations:
    --------------------------------------------------------- */
-int ReadPDBfile(char filename[40],int total_atoms,Atom *aa);
-vAtoms ReadPDBfile(char filename[40]);
-vAtoms ReadPDBfile(std::string fn);
-// typedef std::vector<Atom> Atoms;
-
+// void ReadPDBfile(PDBfile *pdbfile,char filename[40]);
+void read_bond_topology(std::string fn_bonds);
 
 #endif

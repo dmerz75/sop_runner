@@ -34,7 +34,8 @@ Parameters params;
    functions
    --------------------------------------------------------- */
 // void ReadPDBfile (PDBfile *pdbfile,char filename[40],System sys)
-void read_sop_config()
+// void read_sop_config()
+void read_sop_config(std::string sopconfig)
 {
     std::cout << "Reading sop config: " << std::endl;
 
@@ -44,7 +45,8 @@ void read_sop_config()
     std::string line;
     std::vector<std::string> results;
 
-    std::ifstream myfile("sop.conf");
+    // std::ifstream myfile("sop.conf");
+    std::ifstream myfile(sopconfig);
 
     if (myfile.is_open())
     {
@@ -106,6 +108,28 @@ void read_sop_config()
                 boost::split(results, line, [](char c){return c ==' ';});
                 params.dcdstart = std::stoi(results[results.size()-1]);
             }
+            if(boost::algorithm::starts_with(line,"pdb") ||
+               boost::algorithm::starts_with(line,"coordinates"))
+            {
+                boost::split(results, line, [](char c){return c ==' ';});
+                params.pdb = results[results.size()-1];
+            }
+            if(boost::algorithm::starts_with(line,"topology"))
+            {
+                boost::split(results, line, [](char c){return c ==' ';});
+                params.topology = results[results.size()-1];
+            }
+            if(boost::algorithm::starts_with(line,"dcdfile"))
+            {
+                boost::split(results, line, [](char c){return c ==' ';});
+                params.dcdfile = results[results.size()-1];
+            }
+            if(boost::algorithm::starts_with(line,"bond_topology"))
+            {
+                boost::split(results, line, [](char c){return c ==' ';});
+                params.bond_topology = results[results.size()-1];
+            }
+
 
 
         }

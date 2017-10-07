@@ -55,6 +55,9 @@ EXEC = sop_runner
 # ------------------------------------------------------------------------------
 # Macros
 MACRO = -D
+DCDTEST = -DDCDTEST
+DCD     = -DDCDREAD
+DCDW    = -DDCDREAD -DDCD_WRITE_B -DDCD_WRITE -DDCD_WRITE_E
 
 
 # ------------------------------------------------------------------------------
@@ -83,5 +86,5 @@ main:
 # ------------------------------------------------------------------------------
 # Testing:
 dev:
-	$(CXX) $(CF) $(INC) $(CFILES) -o test/$(EXEC)_1
-	cd test/ && ./$(EXEC)_1 atp4b393.pdb hsp70_peptidelinker_4b3934e_mod4b_emol.top sop_runner.dcd
+	$(CXX) $(CF) $(INC) $(CFILES) $(DCDW) -o test/$(EXEC)_1
+	cd test/ && ./$(EXEC)_1 sop.conf
