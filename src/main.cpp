@@ -12,11 +12,7 @@
 #include "ReadPDBfile.hpp"
 #include "contacts.hpp"
 #include "parameters.hpp"
-
-
-// Global Parameters:
-Parameters params;
-
+#include "global.hpp"
 
 int main(int argc, char *argv[]) {
 
@@ -53,14 +49,17 @@ int main(int argc, char *argv[]) {
 
     // Modify Parameters:
     std::cout << "Default params: " << std::endl;
-    std::cout << params.size << " "
-              << params.x << " "
-              << params.y << " "
-              << params.z << " "
-              << std::endl;
+    params.print_parameters();
+    read_sop_config();
+    params.print_parameters();
 
 
+    // DCD?
 
+
+    // Bonds/FENE
+    // Noncovalents-bonded (attractive)
+    // Noncovalents-not-bonded (repulsive)
 
     return 0;
 }

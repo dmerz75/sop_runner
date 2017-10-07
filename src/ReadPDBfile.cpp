@@ -82,6 +82,13 @@ int ReadPDBfile(char filename[40],int total_atoms,Atom *aa)
         {
             while(getline(pdbfile,line))
             {
+                // SPACE LINE
+                if(line.find_first_not_of(' ') == std::string::npos)
+                {
+                    continue;
+                }
+
+
                 if (boost::algorithm::starts_with(line,"ATOM") == 1)
                 {
 

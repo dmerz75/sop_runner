@@ -1516,20 +1516,31 @@ SetContacts read_contacts_from_file(char filename[40])
 
         while(getline(cfile,line))
         {
-            if (boost::algorithm::starts_with(line,"#") == 1)
+            // SPACE LINE
+            if(line.find_first_not_of(' ') == std::string::npos)
             {
                 continue;
             }
-            else if (boost::algorithm::starts_with(line,";") == 1)
+
+            if(boost::algorithm::starts_with(line,"#") ||
+               boost::algorithm::starts_with(line,";"))
             {
                 continue;
             }
+
+            // if (boost::algorithm::starts_with(line,"#") == 1)
+            // {
+            //     continue;
+            // }
+            // else if (boost::algorithm::starts_with(line,";") == 1)
+            // {
+            //     continue;
+            // }
             // else if (boost::algorithm::starts_with(line,"[ native ]") == 1)
             // {
             //     now_read += 1;
             //     continue;
             // }
-
             now_read += 1;
 
             if(now_read != -1)
