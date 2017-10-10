@@ -1,8 +1,8 @@
-# // 1: c++, c: bonds
+# // 1: c++, c: repulsives
 # // 2: name:
-# // .bonds
-#ifndef BONDS_H
-#define BONDS_H
+# // .repulsives
+#ifndef REPULSIVES_H
+#define REPULSIVES_H
 
 /* ---------------------------------------------------------
    libraries:
@@ -10,24 +10,26 @@
 // #include <stdio.h>
 // #include <stdlib.h> // strtod?, stod
 // #include <assert.h>
-#include <string.h> // string
+// #include <string.h> // string
 // #include <cctype.h>
 /* #include <algorithm> // remove_if, count */
 /* #include <iostream> */
 /* #include <fstream> */
 /* #include <ctime> */
 // #include <list>        // std::list
-#include <vector>
 // #include <iterator> // istream_iterator
+// #include <string>
+#include <vector>
 #include "boost/tuple/tuple.hpp"
-
 
 
 /* ---------------------------------------------------------
    headers:
    --------------------------------------------------------- */
 #include "debug.h"
-/* #include "system.hpp" */
+#include "bonds.hpp"
+#include "contacts.hpp"
+// #include "system.hpp"
 // #include "atom.hpp"
 
 
@@ -36,10 +38,8 @@
    Definitions:
    --------------------------------------------------------- */
 /* #define BUFFERSIZE 900 */
-
-typedef boost::tuple<int,int,double> Bond;
-typedef std::vector<Bond> SetBonds;
-
+typedef boost::tuple<int,int> Repulsive;
+typedef std::vector<Repulsive> SetRepulsives;
 
 
 /* ---------------------------------------------------------
@@ -53,6 +53,7 @@ typedef std::vector<Bond> SetBonds;
    function declarations:
    --------------------------------------------------------- */
 // void ReadPDBfile(PDBfile *pdbfile,char filename[40]);
-SetBonds read_bond_topology(std::string fn_bonds);
+SetRepulsives get_repulsively_interacting_indices(vAtoms aa, SetContacts lst_con);
+
 
 #endif

@@ -15,25 +15,28 @@
 #include "parameters.hpp"
 #include "global.hpp"
 #include "bonds.hpp"
+#include "repulsives.hpp"
+
 
 int main(int argc, char *argv[]) {
 
 
     // Modify Parameters:
-    std::cout << "Default params: " << std::endl;
-    params.print_parameters();
+    // Default check:
+    // std::cout << "Default params: " << std::endl;
+    // params.print_parameters();
     read_sop_config(argv[1]);
     params.print_parameters();
 
 
     // Read Atoms from PDB, count # of atoms.
-    vAtoms allatoms_ref;
     int num_atoms;
+    vAtoms allatoms_ref;
     // allatoms_ref = ReadPDBfile(argv[1]);
     allatoms_ref = ReadPDBfile(params.pdb);
     num_atoms = allatoms_ref.size();
-    //
     std::cout << "Number of atoms in allatoms_ref: " << allatoms_ref.size() << std::endl;
+
 
     // Reserve space for the standards.
     // allatoms_ref  -->  allatoms_0, allatoms.
@@ -58,14 +61,24 @@ int main(int argc, char *argv[]) {
     lst_contacts = read_contacts_from_file(params.topology);
 
 
+    // Read bond_topology.
+    SetBonds lst_bonds;
+    lst_bonds = read_bond_topology(params.bond_topology);
+
+    // List_Repulsives: 50 secs for 688 atoms.
+    SetRepulsives lst_repulsives;
+    lst_repulsives = get_repulsively_interacting_indices(allatoms_ref,lst_contacts);
 
     // Have:
     // atoms, starting coordinates, number of them.
-    // topological interactions.
+    // noncovalent, Lennard-Jones topological interactions.
+    // have the FENE bound atoms.
 
-    // need bonds.
-    // lst_bonds = read_bonds_topology(params.bonds_topology);
-    read_bond_topology(params.bond_topology);
+    // Need:
+    // all the repulsives.
+    // PEFs
+    // for loop DCD iterator.
+
 
 
 
